@@ -53,34 +53,34 @@ Finally, we write the code to access the settings. As a good practice I recommen
 
 The method returns an object from the IConfiguration family. In the end, it is enough to consult the required variable as an index:
 
-public static class ConfigHelper
-{
-    public static IConfiguration Config
+    public static class ConfigHelper
     {
-	get
-	{
-	    var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
-	    return builder.Build ();
-	}
+        public static IConfiguration Config
+        {
+            get
+            {
+                var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+                return builder.Build ();
+            }
+        }
     }
-}
 
 And here and start to use the value of the setting, according to what you need:
 
-using System;
-using static NetCoreConsoleSettings.ConfigHelper;
-
-namespace NetCoreConsoleSettings
-{
-	public class Program
-	{
-		public static void Main (string [] args)
-	    {
-		Console.WriteLine($"The value for setting1 is {Config["setting1"]} and for setting2 is {Config["setting2"]}");
-		Console.ReadLine();
-	    }
-	}
-}
+    using System;
+    using static NetCoreConsoleSettings.ConfigHelper;
+     
+    namespace NetCoreConsoleSettings
+    {
+        public class Program
+        {
+	        public static void Main (string [] args)
+            {
+                Console.WriteLine($"The value for setting1 is {Config["setting1"]} and for setting2 is {Config["setting2"]}");
+                Console.ReadLine();
+            }
+        }
+    }
 
 Note that here we use the C # 6.0 feature through which we make using a static class to be able to directly access its members and properties; For example to `Config["nameSetting"]`.
 
